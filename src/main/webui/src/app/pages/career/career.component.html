@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="card mt-4">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="mx-auto">
+          <h2>Career Available</h2>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <label for="position">Position</label>
+            <select id="position" (change)="search($event)">
+              @for(pos of positions() ;track $index){
+                <option [value]="pos">{{pos}}</option>
+              }
+            </select>
+          </div>
+          <div class="col-auto">
+
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary" (click)="open()">+</button>
+        </div>
+      </div>
+      <div class="card-body">
+        @for (data of careers().content; track data.id) {
+          <div class="card w-75 m-auto mb-3">
+            <div class="card-body">
+              <div class="row text-start">
+                <div class="col">
+                  Position:{{ data.position }}
+                </div>
+                <div class="col">
+                  Salary:{{ data.salaryExpect }}
+                </div>
+              </div>
+              <div class="row text-start">
+                <div class="col-6">
+                  Available:{{ data.amountReceived }}
+                </div>
+              </div>
+              <div class="row text-start mb-3">
+                <div class="col-6">
+                  Description:{{ data.description }}
+                </div>
+              </div>
+            </div>
+            <div class=" d-flex  justify-content-end mb-3">
+              <button class="btn btn-info me-3" (click)="edit(data)">Edit</button>
+              <button class="btn btn-danger me-3" (click)="delete(data.id)">Delete</button>
+            </div>
+          </div>
+        }
+        <div class="row">
+          <!--          <span>-->
+          <!--            แสดง {{ startElement | number }}-->
+          <!--            ถึง {{endElement | number}}-->
+          <!--            จากทั้งหมด {{totalElements | number}} รายการ-->
+          <!--          </span>-->
+          <div class="col-12">
+            <ngb-pagination class="d-flex justify-content-center"
+                            [maxSize]="10"
+                            [rotate]="true"
+                            [ellipses]="false"
+                            [boundaryLinks]="true"
+                            [page]="page"
+                            (pageChange)="onPageChange($event)"
+                            [pageSize]="10"
+                            [collectionSize]="totalElements"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,73 @@
+<form #form="ngForm" id="consider-form" class="form-validate">
+  <div class="modal-header">
+    <h6 class="modal-title">
+      {{ title }}
+    </h6>
+    <button type="button" class="btn-close" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row g-3 align-items-center mb-3">
+        <div class="col">
+          <div>
+            <label for="selectPos" class="form-label me-3 ">Position</label>
+          </div>
+          <div>
+            <select id="selectPos" name="selectPos" class="form-select" [(ngModel)]="career()!.position">
+              <option selected [value]="null">Position...</option>
+              @for (pos of positions(); track $index) {
+                <option [value]="pos">{{ pos }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="me-3">
+            <label for="salary" class="form-label">Salary</label>
+          </div>
+          <div class="d-flex">
+            <input type="text" class="form-control me-3" id="salary" [(ngModel)]="career().salaryExpect "
+                   placeholder="10000-25000" name="salary">
+            <span class="form-text">บาท</span>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 align-items-center mb-3">
+        <div class="col-auto">
+          <label for="amount" class="form-label">Available</label>
+        </div>
+        <div class="col-auto">
+          <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="career().amountReceived" placeholder="1-99">
+        </div>
+        <div class="col-auto">
+          <span class="form-text">คน</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]="career().description" name="description"> </textarea>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="status" [(ngModel)]="career().statusPosition">
+            <label class="form-check-label" for="gridCheck1">
+              open/close
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row mt-3 mb-3">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-primary custom-button btn-custom" (click)="confirm()">ยืนยัน</button>
+      <button type="button" class="btn btn-default2 custom-button btn-light ms-2 btn-custom"
+              (click)="cancel()">ยกเลิก
+      </button>
+    </div>
+  </div>
+</form>
